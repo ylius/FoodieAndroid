@@ -75,7 +75,18 @@ public class RestaurantAdapter extends BaseAdapter {
 
         restaurantName.setText(r.getName());
         restaurantAddress.setText(r.getAddress());
-        restaurantType.setText((r.getType() == null) ? r.getCategories().get(0) : r.getType());
+
+        StringBuilder sb = new StringBuilder();
+        if (r.getCategories() != null) {
+            for (int i = 0; i < r.getCategories().size(); i++) {
+                sb.append(r.getCategories().get(i));
+                if (i !=  r.getCategories().size() - 1) {
+                    sb.append(", ");
+                }
+            }
+        }
+
+        restaurantType.setText((r.getType() == null) ? sb.toString() : r.getType());
         restaurantThumbnail.setImageBitmap(r.getThumbnail());
         restaurantRating.setImageBitmap(r.getRating());
 

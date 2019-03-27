@@ -4,19 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#434343"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="#434343">
 
     <ImageView
         android:layout_width="match_parent"
         android:src="@drawable/restaurant"
-        android:layout_height="280dp" />
+        android:layout_height="275dp" />
 
     <LinearLayout
+        android:background="#F2BA4F"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#F2BA4F">
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +30,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextLogin"
             android:layout_gravity="center_horizontal" />
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Log In"
             android:layout_gravity="right"
             android:id="@+id/submit" />
     </LinearLayout>

@@ -4,8 +4,21 @@
     android:layout_height="match_parent"
     tools:context="com.example.chihuo.RestaurantListFragment">
 
-    <ListView android:id="@+id/restaurant_list"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    </ListView>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:src="@drawable/yelp_trademark_rgb"
+            android:background="#d02629"
+            android:layout_width="match_parent"
+            android:layout_height="56dp" />
+
+        <ListView android:id="@+id/restaurant_list"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+    </LinearLayout>
+
+
 </FrameLayout>

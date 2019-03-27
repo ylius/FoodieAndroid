@@ -51,6 +51,7 @@ public class DataService {
             }
         };
     }
+
     /**
      * Get nearby restaurants through Yelp API.
      */
@@ -69,7 +70,7 @@ public class DataService {
     /**
      * Parse the JSON response returned by Yelp API.
      */
-    private List<Restaurant> parseResponse(String jsonResponse)  {
+    private List<Restaurant> parseResponse(String jsonResponse) {
         try {
             JSONObject json = new JSONObject(jsonResponse);
             JSONArray businesses = json.getJSONArray("businesses");
@@ -77,21 +78,39 @@ public class DataService {
             for (int i = 0; i < businesses.length(); i++) {
                 JSONObject business = businesses.getJSONObject(i);
 
-                //Parse restaurant information
+                // Parse restaurant information
                 if (business != null) {
                     String name = business.getString("name");
-                    String type = ((JSONArray) business.get("categories")).
-                            getJSONObject(0).getString("title");
+
+//                    String type = ((JSONArray) business.get("categories")).
+//                            getJSONObject(0).getString("title");
+                    JSONArray jArr = (JSONArray) business.get("categories");
+                    StringBuilder sb = new StringBuilder();
+                    for (int j = 0; j < jArr.length(); j++) {
+                        sb.append(jArr.getJSONObject(j).getString("title"));
+                        if (j != jArr.length() - 1) {
+                            sb.append(", ");
+                        }
+                    }
+                    String type = sb.toString();
 
                     JSONObject location = (JSONObject) business.get("location");
                     JSONObject coordinate = (JSONObject) business.get("coordinates");
                     double lat = coordinate.getDouble("latitude");
                     double lng = coordinate.getDouble("longitude");
-                    String address =
-                            ((JSONArray) location.get("display_address")).get(0).toString();
-
+//                    String address =
+//                            ((JSONArray) location.get("display_address")).get(0).toString();
+                    jArr = (JSONArray) location.get("display_address");
+                    sb = new StringBuilder();
+                    for (int j = 0; j < jArr.length(); j++) {
+                        sb.append(jArr.get(j));
+                        if (j != jArr.length() - 1) {
+                            sb.append(", ");
+                        }
+                    }
+                    String address = sb.toString();
                     // Download the image.
-                    Bitmap thumbnail =  getBitmapFromURL(business.getString("image_url"));
+                    Bitmap thumbnail = getBitmapFromURL(business.getString("image_url"));
                     Bitmap rating = null;//getBitmapFromURL(business.getString("rating_img_url"));
                     Restaurant restaurant = new Restaurant(name, address, type, lat, lng, thumbnail, rating);
                     restaurant.setStars(business.getDouble("rating"));
